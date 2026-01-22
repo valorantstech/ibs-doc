@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBS Platform - Business Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #3B82F6;
+            --gold: #F59E0B;
+            --dark: #1E3A5F;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --info: #0EA5E9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 50px;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 60px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 140px;
+            max-width: 300px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
+        .logo-subtext {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .cover-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 60px 0 20px;
+            line-height: 1.2;
+        }
+
+        .cover-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .cover-meta {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .cover-version {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 40px 50px;
+            margin: -60px -50px 40px;
+        }
+
+        .section-number {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        /* Content Styles */
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 30px 0 15px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray);
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .card-icon.primary { background: rgba(122, 31, 61, 0.1); color: var(--primary); }
+        .card-icon.gold { background: rgba(212, 175, 55, 0.1); color: var(--gold); }
+        .card-icon.success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .card-icon.info { background: rgba(59, 130, 246, 0.1); color: var(--info); }
+        .card-icon.warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .feature-item h4 {
+            margin: 0 0 8px;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        .feature-item p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th {
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+        tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-primary { background: var(--primary); color: var(--white); }
+        .badge-gold { background: var(--gold); color: var(--dark); }
+        .badge-success { background: var(--success); color: var(--white); }
+        .badge-info { background: var(--info); color: var(--white); }
+
+        /* Process Steps */
+        .process-steps {
+            position: relative;
+            padding-left: 30px;
+            margin: 25px 0;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+        }
+
+        .step {
+            position: relative;
+            padding: 15px 0 15px 30px;
+        }
+
+        .step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -19px;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Lists */
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #374151;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(122, 31, 61, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px 25px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary);
+            margin: 0 0 10px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        /* Tier Cards */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .tier-card {
+            text-align: center;
+            padding: 25px 15px;
+            border-radius: 12px;
+            border: 2px solid #E5E7EB;
+        }
+
+        .tier-card.bronze { border-color: #CD7F32; background: rgba(205, 127, 50, 0.05); }
+        .tier-card.silver { border-color: #C0C0C0; background: rgba(192, 192, 192, 0.05); }
+        .tier-card.gold { border-color: #FFD700; background: rgba(255, 215, 0, 0.05); }
+        .tier-card.platinum { border-color: #E5E4E2; background: rgba(229, 228, 226, 0.1); }
+
+        .tier-name {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .tier-rate {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .tier-range {
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 8px;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .toc-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #D1D5DB;
+            font-size: 14px;
+        }
+
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+
+        .toc-item span:first-child {
+            font-weight: 500;
+        }
+
+        .toc-item span:last-child {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Print styles */
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .page { page-break-after: always; }
+            .page:last-child { page-break-after: auto; }
+        }
+
+        /* Icon placeholder */
+        .icon {
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="cover-page">
+    <div class="logo-container">
+        <img src="ibs_logo.png" alt="Online IBS Logo" style="height: 140px; max-width: 300px; object-fit: contain;">
+    </div>
+    <div class="logo-text">Online IBS</div>
+    <div class="logo-subtext">International Business School</div>
+
+    <h1 class="cover-title">Platform Documentation</h1>
+    <p class="cover-subtitle">A comprehensive guide to the Online IBS Learning Management System, E-Commerce Platform, and Affiliate Program</p>
+
+    <div class="cover-meta">
+        <p>Confidential Business Document</p>
+        <div class="cover-version">Version 2.0 | January 2026</div>
+    </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Contents</div>
+        <h1 class="section-title">Table of Contents</h1>
+    </div>
+
+    <div class="toc">
+        <div class="toc-item"><span>1. Platform Overview</span><span>Page 3</span></div>
+        <div class="toc-item"><span>2. User Roles & Access Levels</span><span>Page 4</span></div>
+        <div class="toc-item"><span>3. Student Journey</span><span>Page 5</span></div>
+        <div class="toc-item"><span>4. Teacher & Guest Teacher Onboarding</span><span>Page 6</span></div>
+        <div class="toc-item"><span>5. Agent Partner Program</span><span>Page 7</span></div>
+        <div class="toc-item"><span>6. Commission & Referral Structure</span><span>Page 8</span></div>
+        <div class="toc-item"><span>7. Regional Pricing & Discounts</span><span>Page 9</span></div>
+        <div class="toc-item"><span>8. Student Referral Credits</span><span>Page 10</span></div>
+        <div class="toc-item"><span>9. Payment System</span><span>Page 11</span></div>
+        <div class="toc-item"><span>10. Learning Management System</span><span>Page 12</span></div>
+        <div class="toc-item"><span>11. E-Commerce Shop</span><span>Page 13</span></div>
+        <div class="toc-item"><span>12. Live Sessions</span><span>Page 14</span></div>
+        <div class="toc-item"><span>13. Community Forum</span><span>Page 15</span></div>
+        <div class="toc-item"><span>14. Certificates & Verification</span><span>Page 16</span></div>
+        <div class="toc-item"><span>15. Notification System</span><span>Page 17</span></div>
+        <div class="toc-item"><span>16. Admin Dashboard</span><span>Page 18</span></div>
+        <div class="toc-item"><span>17. Security & Compliance</span><span>Page 19</span></div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 2</span>
+    </div>
+</div>
+
+<!-- Section 1: Platform Overview -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 01</div>
+        <h1 class="section-title">Platform Overview</h1>
+    </div>
+
+    <h2>About Online IBS</h2>
+    <p>Online IBS (International Business School) is a comprehensive digital education platform designed to deliver world-class business education to students worldwide. The platform combines a robust Learning Management System (LMS), E-Commerce capabilities, and a powerful Affiliate Marketing program.</p>
+
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">5</div>
+            <div class="stat-label">User Roles</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">11</div>
+            <div class="stat-label">Target Regions</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">6+</div>
+            <div class="stat-label">Payment Methods</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100+</div>
+            <div class="stat-label">API Endpoints</div>
+        </div>
+    </div>
+
+    <h2>Core Capabilities</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">📚</span> Learning Management</h4>
+            <p>Full-featured LMS with courses, progress tracking, exams, and certificates</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🛍️</span> E-Commerce</h4>
+            <p>Online shop for merchandise, books, and digital products</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🤝</span> Affiliate Program</h4>
+            <p>Tiered commission system for agents with lifetime customer attribution</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💳</span> Payment Processing</h4>
+            <p>Stripe integration with multiple payment methods and currencies</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🎥</span> Live Sessions</h4>
+            <p>Scheduled live classes with Zoom/Google Meet integration</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💬</span> Community</h4>
+            <p>Discussion forums and real-time chat for student engagement</p>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h4>Global Reach</h4>
+        <p>Online IBS is designed to serve students across Europe, Africa, and beyond with region-specific pricing, localized payment methods, and multi-currency support. Base currency is EUR with automatic conversion at checkout.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 3</span>
+    </div>
+</div>
+
+<!-- Section 2: User Roles -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 02</div>
+        <h1 class="section-title">User Roles & Access Levels</h1>
+    </div>
+
+    <p>The platform supports five distinct user roles, each with specific permissions and capabilities designed to serve their unique needs.</p>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon primary"><span class="icon">👨‍🎓</span></div>
+            <div>
+                <div class="card-title">Student</div>
+                <div class="card-subtitle">Default role for all registered users</div>
+            </div>
+        </div>
+        <ul>
+            <li>Browse and enroll in courses (free and paid)</li>
+            <li>Track learning progress and complete assessments</li>
+            <li>Earn certificates upon course completion</li>
+            <li>Participate in forums and live sessions</li>
+            <li>Earn referral credits by inviting friends</li>
+            <li>Purchase products from the shop</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon success"><span class="icon">👨‍🏫</span></div>
+            <div>
+                <div class="card-title">Teacher</div>
+                <div class="card-subtitle">Approved instructors and content creators</div>
+            </div>
+        </div>
+        <ul>
+            <li>Create and manage courses with curriculum builder</li>
+            <li>Upload lectures, materials, and assessments</li>
+            <li>Schedule and conduct live sessions</li>
+            <li>View student progress and analytics</li>
+            <li>Moderate course-specific forums</li>
+            <li>Send announcements to enrolled students</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon gold"><span class="icon">🤝</span></div>
+            <div>
+                <div class="card-title">Agent</div>
+                <div class="card-subtitle">Affiliate partners earning commissions</div>
+            </div>
+        </div>
+        <ul>
+            <li>Receive unique referral codes per target region</li>
+            <li>Earn 15-30% commission on referred sales</li>
+            <li>Track earnings and customer activity in real-time</li>
+            <li>Lifetime attribution for all customer purchases</li>
+            <li>Request payouts via Stripe Connect or bank transfer</li>
+            <li>Unlock milestone bonuses (€500 - €30,000)</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon info"><span class="icon">⚙️</span></div>
+            <div>
+                <div class="card-title">Admin / Super Admin</div>
+                <div class="card-subtitle">Platform administrators with full access</div>
+            </div>
+        </div>
+        <ul>
+            <li>Full user management and role assignment</li>
+            <li>Approve/reject agent and teacher applications</li>
+            <li>Manage all courses, products, and content</li>
+            <li>Process payments, refunds, and payouts</li>
+            <li>Configure system settings and pricing</li>
+            <li>Access analytics and generate reports</li>
+        </ul>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 4</span>
+    </div>
+</div>
+
+<!-- Section 3: Student Journey -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 03</div>
+        <h1 class="section-title">Student Journey</h1>
+    </div>
+
+    <h2>Registration & Onboarding</h2>
+    <p>Students enjoy a streamlined registration process with email verification and optional referral code application.</p>
+
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Account Registration</div>
+            <div class="step-desc">Student provides name, email, and password (minimum 6 characters). Optional: Apply a referral code from an agent or existing student.</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Email Verification</div>
+            <div class="step-desc">A one-time password (OTP) is sent to the registered email. Student verifies their account within the validity period.</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Profile Setup</div>
+            <div class="step-desc">Complete profile with avatar, bio, date of birth, and address information for billing purposes.</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Referral Code Generation</div>
+            <div class="step-desc">Each student automatically receives a unique referral code (STU-XXXXXXXX) to share with friends.</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Course Enrollment</div>
+            <div class="step-desc">Browse available programs, view details, and enroll using credit card, bank transfer, or referral credits.</div>
+        </div>
+        <div class="step" data-step="6">
+            <div class="step-title">Learning Journey</div>
+            <div class="step-desc">Access course materials, attend live sessions, participate in forums, and track progress toward certification.</div>
+        </div>
+    </div>
+
+    <h2>Student Dashboard Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>My Courses</h4>
+            <p>View enrolled programs with progress indicators and quick access to content</p>
+        </div>
+        <div class="feature-item">
+            <h4>Progress Tracking</h4>
+            <p>Visual progress bars and completion percentages for each course</p>
+        </div>
+        <div class="feature-item">
+            <h4>Certificates</h4>
+            <p>Download and share earned certificates with unique verification codes</p>
+        </div>
+        <div class="feature-item">
+            <h4>Referral Credits</h4>
+            <p>View available credits, earnings history, and expiry dates</p>
+        </div>
+        <div class="feature-item">
+            <h4>Notifications</h4>
+            <p>Stay updated on announcements, sessions, and course updates</p>
+        </div>
+        <div class="feature-item">
+            <h4>Settings</h4>
+            <p>Manage profile, password, and notification preferences</p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 5</span>
+    </div>
+</div>
+
+<!-- Section 4: Teacher Onboarding -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 04</div>
+        <h1 class="section-title">Teacher & Guest Teacher Onboarding</h1>
+    </div>
+
+    <h2>Teacher Application Process</h2>
+    <p>Individuals with expertise in business subjects can apply to become teachers on the platform. All applications are reviewed by administrators.</p>
+
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Submit Application</div>
+            <div class="step-desc">Provide qualifications, teaching experience, areas of expertise, and portfolio/CV. Include social profiles and references.</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Admin Review</div>
+            <div class="step-desc">Platform administrators evaluate credentials, experience, and subject matter expertise. Background verification may be conducted.</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Approval & Role Assignment</div>
+            <div class="step-desc">Upon approval, user role is upgraded to "Teacher" with access to the Teacher Dashboard and course creation tools.</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Profile Setup</div>
+            <div class="step-desc">Create a professional instructor profile with photo, bio, qualifications, and contact information visible to students.</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Course Creation</div>
+            <div class="step-desc">Use the Program Builder Wizard to create courses with modules, lectures, materials, and assessments.</div>
+        </div>
+    </div>
+
+    <h2>Teacher Dashboard Capabilities</h2>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon success"><span class="icon">📊</span></div>
+            <div>
+                <div class="card-title">Analytics & Insights</div>
+                <div class="card-subtitle">Track course performance and student engagement</div>
+            </div>
+        </div>
+        <ul>
+            <li>View enrollment numbers and revenue per course</li>
+            <li>Monitor student progress and completion rates</li>
+            <li>Analyze assessment scores and performance trends</li>
+            <li>Track live session attendance</li>
+        </ul>
+    </div>
+
+    <h2>Guest Teacher Program</h2>
+    <p>Industry experts and guest lecturers can be invited to conduct specific sessions or modules without full teacher privileges.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Limited Access</h4>
+            <p>Access only to assigned courses and sessions, not full platform features</p>
+        </div>
+        <div class="feature-item">
+            <h4>Session-Based</h4>
+            <p>Invited for specific live sessions or lecture recordings</p>
+        </div>
+        <div class="feature-item">
+            <h4>Faculty Profile</h4>
+            <p>Listed in Faculty directory with bio, expertise, and credentials</p>
+        </div>
+        <div class="feature-item">
+            <h4>Admin Managed</h4>
+            <p>All guest teacher assignments handled by administrators</p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 6</span>
+    </div>
+</div>
+
+<!-- Section 5: Agent Partner Program -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 05</div>
+        <h1 class="section-title">Agent Partner Program</h1>
+    </div>
+
+    <h2>Become an Agent</h2>
+    <p>The Agent Partner Program enables individuals and organizations to earn substantial commissions by referring students to Online IBS. Agents receive region-specific referral codes and benefit from lifetime customer attribution.</p>
+
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Application Submission</div>
+            <div class="step-desc">Provide company/business name, target regions, bank details (IBAN, SWIFT), and tax information (Tax ID, country).</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Admin Review</div>
+            <div class="step-desc">Applications are reviewed for legitimacy, business credentials, and alignment with IBS values. Average review time: 24-48 hours.</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Approval & Code Generation</div>
+            <div class="step-desc">Upon approval, unique referral codes are generated for each selected region (e.g., AGENT-JOHN-WESTERNEUROPE).</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Stripe Connect Setup</div>
+            <div class="step-desc">Complete Stripe Express onboarding for instant payouts. Alternatively, provide bank details for manual transfers.</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Start Earning</div>
+            <div class="step-desc">Share referral codes with potential students. Earn commission on every successful enrollment.</div>
+        </div>
+    </div>
+
+    <h2>Agent Dashboard</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Earnings Overview</h4>
+            <p>Real-time display of total earnings, pending payouts, and available balance</p>
+        </div>
+        <div class="feature-item">
+            <h4>Referral Tracking</h4>
+            <p>Monitor all referrals with status (registered, enrolled, paid, credited)</p>
+        </div>
+        <div class="feature-item">
+            <h4>Performance Charts</h4>
+            <p>Monthly revenue and earnings trends with visual graphs</p>
+        </div>
+        <div class="feature-item">
+            <h4>Tier Progress</h4>
+            <p>Track progress toward next commission tier with sales targets</p>
+        </div>
+        <div class="feature-item">
+            <h4>Customer List</h4>
+            <p>View all referred customers and their lifetime purchase history</p>
+        </div>
+        <div class="feature-item">
+            <h4>Payout Management</h4>
+            <p>Request withdrawals and track payout history</p>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h4>Lifetime Customer Attribution</h4>
+        <p>When an agent refers a customer, that customer is permanently linked to the agent. The agent earns commission on ALL future purchases made by that customer, creating a sustainable passive income stream.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 7</span>
+    </div>
+</div>
+
+<!-- Section 6: Commission Structure -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 06</div>
+        <h1 class="section-title">Commission & Referral Structure</h1>
+    </div>
+
+    <h2>Agent Commission Tiers</h2>
+    <p>Agents progress through four commission tiers based on their cumulative lifetime sales. Higher tiers unlock better commission rates.</p>
+
+    <div class="tier-grid">
+        <div class="tier-card bronze">
+            <div class="tier-name">Bronze</div>
+            <div class="tier-rate">15%</div>
+            <div class="tier-range">€0 - €9,999</div>
+        </div>
+        <div class="tier-card silver">
+            <div class="tier-name">Silver</div>
+            <div class="tier-rate">20%</div>
+            <div class="tier-range">€10,000 - €49,999</div>
+        </div>
+        <div class="tier-card gold">
+            <div class="tier-name">Gold</div>
+            <div class="tier-rate">25%</div>
+            <div class="tier-range">€50,000 - €99,999</div>
+        </div>
+        <div class="tier-card platinum">
+            <div class="tier-name">Platinum</div>
+            <div class="tier-rate">30%</div>
+            <div class="tier-range">€100,000+</div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: var(--gray); font-size: 14px; margin-top: -10px;">All tiers include 24-hour payout processing</p>
+
+    <h2>Milestone Bonuses</h2>
+    <p>Agents unlock one-time bonus rewards when reaching transaction milestones:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Milestone</th>
+                <th>Number of Sales</th>
+                <th>Bonus Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge badge-info">Milestone 1</span></td>
+                <td>10 successful sales</td>
+                <td><strong>€500</strong></td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-info">Milestone 2</span></td>
+                <td>50 successful sales</td>
+                <td><strong>€2,000</strong></td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-success">Milestone 3</span></td>
+                <td>100 successful sales</td>
+                <td><strong>€5,000</strong></td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-gold">Milestone 4</span></td>
+                <td>500 successful sales</td>
+                <td><strong>€15,000</strong></td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-primary">Milestone 5</span></td>
+                <td>1,000 successful sales</td>
+                <td><strong>€30,000</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Commission Calculation Example</h2>
+    <div class="card">
+        <p><strong>Scenario:</strong> A Silver-tier agent refers a student who purchases a €2,999 MBA program.</p>
+        <ul>
+            <li>Base Price: €2,999</li>
+            <li>Commission Rate (Silver): 20%</li>
+            <li><strong>Agent Earnings: €599.80</strong></li>
+        </ul>
+        <p style="margin-top: 15px; font-size: 14px; color: var(--gray);">If the same customer purchases another course worth €1,500 in the future, the agent earns an additional €300 (lifetime attribution).</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 8</span>
+    </div>
+</div>
+
+<!-- Section 6b: How Referrals Work - Detailed Flow -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 06b</div>
+        <h1 class="section-title">How Agent Referrals Work</h1>
+    </div>
+
+    <h2>Complete Referral Flow</h2>
+    <p>Understanding the end-to-end process of how agents earn commissions through the Online IBS referral system.</p>
+
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Agent Receives Unique Code</div>
+            <div class="step-desc">Upon approval, agents receive region-specific referral codes (e.g., <code>AGENT-JOHN-WESTERNEUROPE</code>). Each agent can have multiple codes for different regions they serve.</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Agent Shares Code</div>
+            <div class="step-desc">Agent promotes their code through marketing materials, social media, direct outreach, educational fairs, or their professional network. The code can be shared via link or entered manually at checkout.</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Student Uses Code at Signup or Checkout</div>
+            <div class="step-desc">When a student registers with the referral code or applies it during payment, they are permanently linked to that agent. Regional discounts are automatically applied based on the code's region.</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Student Completes Purchase</div>
+            <div class="step-desc">Student selects a program, proceeds to checkout, and completes payment via Stripe. The system records the transaction with the agent's attribution.</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Commission Calculated & Credited</div>
+            <div class="step-desc">System automatically calculates commission based on the agent's current tier (15-30%) and the course price. Commission is instantly credited to the agent's balance.</div>
+        </div>
+        <div class="step" data-step="6">
+            <div class="step-title">Agent Requests Payout</div>
+            <div class="step-desc">Agent can request payout anytime from their dashboard. Payouts are processed within 24 hours via Stripe Connect (instant) or bank transfer (1-3 business days).</div>
+        </div>
+    </div>
+
+    <h2>Key Referral Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">🔗</span> Permanent Customer Link</h4>
+            <p>Once a customer uses an agent's code, they are permanently attributed to that agent for all future purchases</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">⚡</span> Instant Commission</h4>
+            <p>Commissions are calculated and credited immediately upon successful payment</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📊</span> Real-Time Tracking</h4>
+            <p>Agents can monitor referrals, earnings, and payouts in real-time via their dashboard</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🌍</span> Multi-Region Support</h4>
+            <p>Agents can operate in multiple regions with separate codes and appropriate discounts</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px;">
+        <h4 style="margin-bottom: 15px;">Example Scenario</h4>
+        <table style="margin: 0; box-shadow: none;">
+            <tbody>
+                <tr><td width="40%">Agent Tier</td><td><strong>Silver (20% commission)</strong></td></tr>
+                <tr><td>Student Region</td><td><strong>Nigeria (13% discount)</strong></td></tr>
+                <tr><td>Course Price</td><td><strong>€2,999</strong></td></tr>
+                <tr><td>Student Pays</td><td>€2,999 × 0.87 = <strong>€2,609.13</strong></td></tr>
+                <tr><td>Agent Earns</td><td>€2,999 × 0.20 = <strong>€599.80</strong></td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 15px; font-size: 13px; color: var(--gray);">Note: Agent commission is calculated on the original price, not the discounted amount. This ensures agents are fairly compensated regardless of regional discounts.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 8b</span>
+    </div>
+</div>
+
+<!-- Section 7: Regional Pricing -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 07</div>
+        <h1 class="section-title">Regional Pricing & Discounts</h1>
+    </div>
+
+    <h2>Target Regions</h2>
+    <p>Online IBS operates in 11 distinct regions, each with customized discount structures to make education accessible to students worldwide.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Countries Covered</th>
+                <th>Student Discount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Western Europe</strong></td>
+                <td>UK, Germany, France, Netherlands, Belgium, Switzerland, Austria, Ireland</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td><strong>Northern Europe</strong></td>
+                <td>Sweden, Norway, Denmark, Finland, Iceland</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td><strong>Southern Europe</strong></td>
+                <td>Italy, Spain, Portugal, Greece</td>
+                <td>8%</td>
+            </tr>
+            <tr>
+                <td><strong>Eastern Europe</strong></td>
+                <td>Poland, Czech Republic, Hungary, Romania, Bulgaria, Croatia, Serbia</td>
+                <td>10%</td>
+            </tr>
+            <tr>
+                <td><strong>South Africa</strong></td>
+                <td>South Africa</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Nigeria</strong></td>
+                <td>Nigeria</td>
+                <td>13%</td>
+            </tr>
+            <tr>
+                <td><strong>Kenya</strong></td>
+                <td>Kenya</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Ghana</strong></td>
+                <td>Ghana</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Egypt</strong></td>
+                <td>Egypt</td>
+                <td>17%</td>
+            </tr>
+            <tr>
+                <td><strong>Morocco</strong></td>
+                <td>Morocco</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>East Africa</strong></td>
+                <td>Rwanda, Tanzania, Uganda</td>
+                <td>12%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>How Regional Discounts Work</h2>
+    <div class="card">
+        <p>When a student uses an agent's region-specific referral code, the regional discount is automatically applied at checkout:</p>
+        <ul>
+            <li>Student selects a course priced at €2,999</li>
+            <li>Uses agent code for Nigeria region</li>
+            <li>13% discount applied: €2,999 × 0.87 = <strong>€2,609.13</strong></li>
+            <li>Agent still earns commission on the original price</li>
+        </ul>
+    </div>
+
+    <div class="highlight-box">
+        <h4>Currency & Payment</h4>
+        <p>All prices are displayed in EUR (€). At checkout, Stripe automatically shows the equivalent amount in the customer's local currency and accepts local payment methods. Agents always receive payouts in EUR.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 9</span>
+    </div>
+</div>
+
+<!-- Section 8: Student Referral Credits -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 08</div>
+        <h1 class="section-title">Student Referral Credits</h1>
+    </div>
+
+    <h2>Peer-to-Peer Referral Program</h2>
+    <p>Students can earn credits by referring friends to Online IBS. Unlike agent commissions, student credits are <strong>non-withdrawable</strong> and can only be used for purchases on the platform.</p>
+
+    <div class="highlight-box">
+        <h4>Important: Credits vs. Cash</h4>
+        <p>Student referral rewards are issued as platform credits, not cash. Credits can be used to purchase courses (100% usable) or shop products (50% usable). Credits expire 60 days after being earned.</p>
+    </div>
+
+    <h2>Student Referral Tiers</h2>
+    <p>Students earn higher rewards as they refer more friends:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Successful Referrals</th>
+                <th>Reward per Referral</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge" style="background: #CD7F32; color: white;">Bronze</span></td>
+                <td>0 - 5 referrals</td>
+                <td><strong>€20</strong> credit</td>
+            </tr>
+            <tr>
+                <td><span class="badge" style="background: #C0C0C0; color: #333;">Silver</span></td>
+                <td>6 - 15 referrals</td>
+                <td><strong>€25</strong> credit</td>
+            </tr>
+            <tr>
+                <td><span class="badge" style="background: #FFD700; color: #333;">Gold</span></td>
+                <td>16 - 25 referrals</td>
+                <td><strong>€30</strong> credit</td>
+            </tr>
+            <tr>
+                <td><span class="badge" style="background: #E5E4E2; color: #333;">Platinum</span></td>
+                <td>26+ referrals</td>
+                <td><strong>€35</strong> credit</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Credit Usage Rules</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Courses: 100%</h4>
+            <p>Full credit balance can be applied toward course purchases</p>
+        </div>
+        <div class="feature-item">
+            <h4>Products: 50%</h4>
+            <p>Only half of available credits can be used for shop purchases</p>
+        </div>
+        <div class="feature-item">
+            <h4>Minimum: €5</h4>
+            <p>At least €5 in credits required to apply to a purchase</p>
+        </div>
+        <div class="feature-item">
+            <h4>Expiry: 60 Days</h4>
+            <p>Credits expire 60 days after being earned (FIFO usage)</p>
+        </div>
+    </div>
+
+    <h2>Credit Lifecycle</h2>
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Referral Code Shared</div>
+            <div class="step-desc">Student shares their unique code (STU-XXXXXXXX) with a friend</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Friend Registers</div>
+            <div class="step-desc">Friend creates account using the referral code</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Friend Enrolls & Pays</div>
+            <div class="step-desc">Friend completes enrollment in a paid course</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Credit Awarded</div>
+            <div class="step-desc">Referring student receives credit with 60-day validity</div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 10</span>
+    </div>
+</div>
+
+<!-- Section 8b: How Student Referrals Work -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 08b</div>
+        <h1 class="section-title">How Student Referrals Work</h1>
+    </div>
+
+    <h2>Step-by-Step Process</h2>
+    <p>Every enrolled student receives a unique referral code that they can share with friends and family to earn credits.</p>
+
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Student Gets Referral Code</div>
+            <div class="step-desc">After enrolling in any paid course, students automatically receive a unique referral code (format: <code>STU-XXXXXXXX</code>) visible in their dashboard.</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Share with Friends</div>
+            <div class="step-desc">Student shares the code via social media, messaging apps, email, or word of mouth. A shareable referral link is also provided.</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Friend Signs Up</div>
+            <div class="step-desc">Friend creates an account on Online IBS using the referral code. The referral is tracked but credit is not yet awarded.</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Friend Enrolls in Paid Course</div>
+            <div class="step-desc">Friend browses courses and completes payment for any paid program. This triggers the referral reward process.</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Credit Awarded to Referrer</div>
+            <div class="step-desc">The referring student receives €20-35 in credits (based on their referral tier). Credits are valid for 60 days from award date.</div>
+        </div>
+        <div class="step" data-step="6">
+            <div class="step-title">Use Credits at Checkout</div>
+            <div class="step-desc">Student can apply credits during checkout. Full balance usable for courses; 50% limit for shop products.</div>
+        </div>
+    </div>
+
+    <h2>Important Rules</h2>
+    <div class="highlight-box" style="background: #EFF6FF; border-color: var(--primary);">
+        <ul style="margin: 0; padding-left: 20px;">
+            <li><strong>Credits are NOT cash</strong> – Cannot be withdrawn or transferred to bank account</li>
+            <li><strong>Credits expire</strong> – 60-day validity from the date earned (configurable by admin)</li>
+            <li><strong>FIFO usage</strong> – Oldest credits are used first to minimize expiration waste</li>
+            <li><strong>Minimum €5</strong> – At least €5 required to apply credits to a purchase</li>
+            <li><strong>Courses: 100%</strong> – Full credit balance can cover course fees</li>
+            <li><strong>Products: 50%</strong> – Only half of available credits usable for shop items</li>
+            <li><strong>Referral must pay</strong> – Credit only awarded when referred friend completes payment</li>
+        </ul>
+    </div>
+
+    <h2>Example Credit Usage</h2>
+    <div class="card">
+        <table style="margin: 0; box-shadow: none;">
+            <tbody>
+                <tr><td width="50%">Student Credit Balance</td><td><strong>€60</strong></td></tr>
+                <tr><td>Course Purchase (€500)</td><td>Can use full €60 → Pays <strong>€440</strong></td></tr>
+                <tr><td>Product Purchase (€100)</td><td>Can use 50% = €30 → Pays <strong>€70</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="feature-grid" style="margin-top: 30px;">
+        <div class="feature-item">
+            <h4><span class="icon">📱</span> Easy Sharing</h4>
+            <p>One-click share buttons for WhatsApp, Email, Facebook, Twitter, and copy link</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📈</span> Tier Progression</h4>
+            <p>More referrals = higher rewards. Progress from €20 to €35 per referral</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🔔</span> Notifications</h4>
+            <p>Email and in-app alerts when credits are earned or about to expire</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📊</span> Track Progress</h4>
+            <p>Dashboard shows total referrals, pending credits, and usage history</p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 10b</span>
+    </div>
+</div>
+
+<!-- Section 9: Payment System -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 09</div>
+        <h1 class="section-title">Payment System</h1>
+    </div>
+
+    <h2>Supported Payment Methods</h2>
+    <p>Online IBS integrates with Stripe to offer multiple payment options catering to customers worldwide.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">💳</span> Credit/Debit Cards</h4>
+            <p>Visa, Mastercard, American Express, and more via Stripe</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🏦</span> SEPA Direct Debit</h4>
+            <p>Bank transfers for European customers</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🇧🇪</span> Bancontact</h4>
+            <p>Popular payment method in Belgium</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🇳🇱</span> iDEAL</h4>
+            <p>Preferred payment method in Netherlands</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🇩🇪</span> Giropay</h4>
+            <p>German online bank transfer system</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🇪🇺</span> Sofort</h4>
+            <p>Real-time bank transfers in Germany, Austria & more</p>
+        </div>
+    </div>
+
+    <h2>Payment Flow</h2>
+    <div class="card">
+        <ol style="padding-left: 20px;">
+            <li style="margin: 10px 0;"><strong>Cart/Checkout:</strong> Student selects course or products and proceeds to checkout</li>
+            <li style="margin: 10px 0;"><strong>Apply Credits:</strong> Option to apply referral credits (100% for courses, 50% for products)</li>
+            <li style="margin: 10px 0;"><strong>Apply Coupon:</strong> Optional promotional code for additional discounts</li>
+            <li style="margin: 10px 0;"><strong>Billing Info:</strong> Enter name, email, country, and contact details</li>
+            <li style="margin: 10px 0;"><strong>Stripe Checkout:</strong> Redirect to secure Stripe payment page</li>
+            <li style="margin: 10px 0;"><strong>Confirmation:</strong> Return to success page with enrollment confirmation</li>
+        </ol>
+    </div>
+
+    <h2>Payment Features</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Base Currency</td>
+                <td>EUR (€) - All prices displayed in Euro</td>
+            </tr>
+            <tr>
+                <td>Currency Conversion</td>
+                <td>Automatic conversion shown at Stripe checkout</td>
+            </tr>
+            <tr>
+                <td>Credit + Card</td>
+                <td>Combine referral credits with card payment</td>
+            </tr>
+            <tr>
+                <td>Full Credit Payment</td>
+                <td>Pay entirely with credits (no Stripe redirect)</td>
+            </tr>
+            <tr>
+                <td>Promotion Codes</td>
+                <td>Stripe-powered coupon code support</td>
+            </tr>
+            <tr>
+                <td>Free Shipping</td>
+                <td>Shop orders over €50 qualify for free shipping</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 11</span>
+    </div>
+</div>
+
+<!-- Section 10: LMS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 10</div>
+        <h1 class="section-title">Learning Management System</h1>
+    </div>
+
+    <h2>Program Structure</h2>
+    <p>Courses on Online IBS are organized as comprehensive programs with modular content delivery.</p>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon primary"><span class="icon">📚</span></div>
+            <div>
+                <div class="card-title">Program Components</div>
+                <div class="card-subtitle">Each program includes the following elements</div>
+            </div>
+        </div>
+        <ul>
+            <li><strong>Overview:</strong> Title, description, thumbnail, instructor profile</li>
+            <li><strong>Curriculum:</strong> Modules with lectures, duration, and learning objectives</li>
+            <li><strong>Materials:</strong> Video lectures, downloadable resources, readings</li>
+            <li><strong>Assessments:</strong> Quizzes, exams, assignments with scoring</li>
+            <li><strong>Certificate:</strong> Completion certificate with verification code</li>
+        </ul>
+    </div>
+
+    <h2>Learning Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Progress Tracking</h4>
+            <p>Visual progress bars (0-100%) with automatic save</p>
+        </div>
+        <div class="feature-item">
+            <h4>Video Lectures</h4>
+            <p>HD video content with playback controls and notes</p>
+        </div>
+        <div class="feature-item">
+            <h4>Assessments</h4>
+            <p>Timed exams with instant scoring and feedback</p>
+        </div>
+        <div class="feature-item">
+            <h4>Certificates</h4>
+            <p>Auto-generated upon 85% completion threshold</p>
+        </div>
+        <div class="feature-item">
+            <h4>Live Sessions</h4>
+            <p>Scheduled classes via Zoom/Google Meet</p>
+        </div>
+        <div class="feature-item">
+            <h4>Discussion Forums</h4>
+            <p>Course-specific Q&A and peer discussions</p>
+        </div>
+    </div>
+
+    <h2>Program Levels</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Target Audience</th>
+                <th>Typical Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge badge-success">Beginner</span></td>
+                <td>New to the subject matter</td>
+                <td>4-8 weeks</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-info">Intermediate</span></td>
+                <td>Some prior knowledge required</td>
+                <td>8-12 weeks</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-primary">Advanced</span></td>
+                <td>Experienced professionals</td>
+                <td>12-24 weeks</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <h4>Exam Requirements</h4>
+        <p>Default exam settings: 30-minute duration, 100% pass score required. Students can retake exams. Certificate unlocks at 85% course completion.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 12</span>
+    </div>
+</div>
+
+<!-- Section 11: E-Commerce -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 11</div>
+        <h1 class="section-title">E-Commerce Shop</h1>
+    </div>
+
+    <h2>Product Categories</h2>
+    <p>The Online IBS Shop offers a variety of products to complement the learning experience.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">👕</span> Merchandise</h4>
+            <p>Branded apparel, accessories, and stationery</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📖</span> Books</h4>
+            <p>Textbooks, study guides, and reference materials</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💻</span> Digital Products</h4>
+            <p>E-books, templates, and downloadable resources</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🎓</span> Certificates</h4>
+            <p>Physical certificate copies and frames</p>
+        </div>
+    </div>
+
+    <h2>Shop Features</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Browse & Search:</strong> Filter by category, price range, and popularity</li>
+            <li><strong>Product Details:</strong> Multiple images, descriptions, reviews, and ratings</li>
+            <li><strong>Shopping Cart:</strong> Add items, adjust quantities, apply credits</li>
+            <li><strong>Secure Checkout:</strong> Same payment methods as course enrollment</li>
+            <li><strong>Order Tracking:</strong> View order status and history</li>
+            <li><strong>Digital Delivery:</strong> Instant access to digital products after purchase</li>
+        </ul>
+    </div>
+
+    <h2>Shipping & Pricing</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Standard Shipping</td>
+                <td>€5.00 flat rate</td>
+            </tr>
+            <tr>
+                <td>Free Shipping Threshold</td>
+                <td>Orders over €50</td>
+            </tr>
+            <tr>
+                <td>Digital Products</td>
+                <td>Instant delivery (no shipping)</td>
+            </tr>
+            <tr>
+                <td>Credit Usage</td>
+                <td>50% of referral credits applicable</td>
+            </tr>
+            <tr>
+                <td>Cart Expiry</td>
+                <td>72 hours (items return to inventory)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Order Management</h2>
+    <p>Orders are tracked with unique order numbers (IBS202401XXXXX) and progress through the following statuses:</p>
+    <div style="display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap;">
+        <span class="badge" style="background: #FEF3C7; color: #92400E;">Pending</span>
+        <span style="font-size: 20px;">→</span>
+        <span class="badge" style="background: #DBEAFE; color: #1E40AF;">Confirmed</span>
+        <span style="font-size: 20px;">→</span>
+        <span class="badge" style="background: #E0E7FF; color: #3730A3;">Processing</span>
+        <span style="font-size: 20px;">→</span>
+        <span class="badge badge-success">Completed</span>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 13</span>
+    </div>
+</div>
+
+<!-- Section 12: Live Sessions -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 12</div>
+        <h1 class="section-title">Live Sessions</h1>
+    </div>
+
+    <h2>Overview</h2>
+    <p>Live Sessions enable real-time interaction between teachers and students through integrated video conferencing. Teachers can schedule sessions, share meeting links, and track attendance.</p>
+
+    <h2>Session Lifecycle</h2>
+    <div class="process-steps">
+        <div class="step" data-step="1">
+            <div class="step-title">Schedule Session</div>
+            <div class="step-desc">Teacher creates session with title, description, date/time, duration, and meeting link (Zoom/Google Meet)</div>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-title">Notification Sent</div>
+            <div class="step-desc">Enrolled students receive email notification 24 hours before the session</div>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-title">Session Goes Live</div>
+            <div class="step-desc">Status changes to "Live" at scheduled time; students can join via meeting link</div>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-title">Attendance Tracked</div>
+            <div class="step-desc">System records which students joined the session</div>
+        </div>
+        <div class="step" data-step="5">
+            <div class="step-title">Session Completed</div>
+            <div class="step-desc">Recording link can be added for students who missed the live session</div>
+        </div>
+    </div>
+
+    <h2>Session Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Multi-Instructor</h4>
+            <p>Sessions can have multiple instructors for panel discussions</p>
+        </div>
+        <div class="feature-item">
+            <h4>Learning Topics</h4>
+            <p>Define agenda items and topics covered in the session</p>
+        </div>
+        <div class="feature-item">
+            <h4>Email Reminders</h4>
+            <p>Automatic reminders sent 24 hours before session</p>
+        </div>
+        <div class="feature-item">
+            <h4>Recording Access</h4>
+            <p>Post-session recording links for on-demand viewing</p>
+        </div>
+    </div>
+
+    <h2>Session Statuses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge" style="background: #DBEAFE; color: #1E40AF;">Scheduled</span></td>
+                <td>Session is planned but hasn't started yet</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-success">Live</span></td>
+                <td>Session is currently in progress</td>
+            </tr>
+            <tr>
+                <td><span class="badge" style="background: #E5E7EB; color: #374151;">Completed</span></td>
+                <td>Session has ended successfully</td>
+            </tr>
+            <tr>
+                <td><span class="badge" style="background: #FEE2E2; color: #991B1B;">Cancelled</span></td>
+                <td>Session was cancelled by instructor</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 14</span>
+    </div>
+</div>
+
+<!-- Section 13: Community Forum -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 13</div>
+        <h1 class="section-title">Community Forum</h1>
+    </div>
+
+    <h2>Forum Structure</h2>
+    <p>The discussion forum facilitates peer-to-peer learning and community engagement across the platform.</p>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon info"><span class="icon">💬</span></div>
+            <div>
+                <div class="card-title">Forum Organization</div>
+                <div class="card-subtitle">Hierarchical structure for organized discussions</div>
+            </div>
+        </div>
+        <ul>
+            <li><strong>Categories:</strong> Top-level organization (General, Course-Specific, Private)</li>
+            <li><strong>Posts:</strong> Individual discussion topics within categories</li>
+            <li><strong>Replies:</strong> Threaded responses to posts</li>
+            <li><strong>Tags:</strong> Cross-cutting labels for content discovery</li>
+        </ul>
+    </div>
+
+    <h2>Post Types</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Discussion</h4>
+            <p>General topics for open conversation and debate</p>
+        </div>
+        <div class="feature-item">
+            <h4>Question</h4>
+            <p>Q&A format with ability to mark solutions</p>
+        </div>
+        <div class="feature-item">
+            <h4>Announcement</h4>
+            <p>Important notices from teachers/admins (pinnable)</p>
+        </div>
+        <div class="feature-item">
+            <h4>Poll</h4>
+            <p>Multiple choice voting for community input</p>
+        </div>
+    </div>
+
+    <h2>Access Levels</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User Type</th>
+                <th>Permissions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Visitor</td>
+                <td>Read public forums only</td>
+            </tr>
+            <tr>
+                <td>Registered User</td>
+                <td>Read all public content</td>
+            </tr>
+            <tr>
+                <td>Enrolled Student</td>
+                <td>Read, create posts, comment, vote</td>
+            </tr>
+            <tr>
+                <td>Teacher</td>
+                <td>Full access + moderation in their courses</td>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>Full access + global moderation</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Moderation Features</h2>
+    <ul>
+        <li><strong>Pin Posts:</strong> Keep important discussions at the top</li>
+        <li><strong>Lock Threads:</strong> Prevent further replies</li>
+        <li><strong>Hide/Reject:</strong> Remove inappropriate content</li>
+        <li><strong>Report Queue:</strong> Review user-reported content</li>
+        <li><strong>Edit History:</strong> Track all changes to posts</li>
+        <li><strong>Spam Prevention:</strong> Rate limiting (60s between posts, max 10/hour)</li>
+    </ul>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 15</span>
+    </div>
+</div>
+
+<!-- Section 14: Certificates -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 14</div>
+        <h1 class="section-title">Certificates & Verification</h1>
+    </div>
+
+    <h2>Certificate Types</h2>
+    <p>Online IBS issues verified certificates to recognize student achievements.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Course Completion</h4>
+            <p>Awarded upon completing a full course (85% threshold)</p>
+        </div>
+        <div class="feature-item">
+            <h4>Program Completion</h4>
+            <p>Comprehensive certificate for multi-course programs</p>
+        </div>
+        <div class="feature-item">
+            <h4>Achievement</h4>
+            <p>Special recognition for outstanding performance</p>
+        </div>
+        <div class="feature-item">
+            <h4>Participation</h4>
+            <p>Attendance certificates for workshops and events</p>
+        </div>
+    </div>
+
+    <h2>Certificate Details</h2>
+    <div class="card">
+        <p>Each certificate includes:</p>
+        <ul>
+            <li><strong>Unique Code:</strong> IBS-CERT-XXXXXX for verification</li>
+            <li><strong>Recipient Name:</strong> Student's registered name</li>
+            <li><strong>Course/Program:</strong> Title and description</li>
+            <li><strong>Completion Date:</strong> Date of achievement</li>
+            <li><strong>Grade/Score:</strong> Assessment performance (if applicable)</li>
+            <li><strong>Study Hours:</strong> Total learning time</li>
+            <li><strong>Skills:</strong> Competencies demonstrated</li>
+            <li><strong>Instructor Signature:</strong> Digital signature</li>
+            <li><strong>QR Code:</strong> Quick link to verification page</li>
+        </ul>
+    </div>
+
+    <h2>Verification System</h2>
+    <p>All certificates can be verified through the public verification page:</p>
+    <div class="highlight-box">
+        <h4>Verification URL</h4>
+        <p><code>https://onlineibs.com/verify/IBS-CERT-XXXXXX</code></p>
+        <p style="margin-top: 10px; font-size: 13px;">Anyone with the certificate code can verify its authenticity, view details, and confirm the recipient's achievement.</p>
+    </div>
+
+    <h2>Certificate Features</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PDF Download</td>
+                <td>High-quality printable certificate</td>
+            </tr>
+            <tr>
+                <td>Social Sharing</td>
+                <td>Share to LinkedIn, Twitter, Facebook</td>
+            </tr>
+            <tr>
+                <td>Email Notification</td>
+                <td>Automatic email when certificate is ready</td>
+            </tr>
+            <tr>
+                <td>Never Expires</td>
+                <td>Certificates are valid indefinitely</td>
+            </tr>
+            <tr>
+                <td>Revocation</td>
+                <td>Admins can revoke with documented reason</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 16</span>
+    </div>
+</div>
+
+<!-- Section 15: Notifications -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 15</div>
+        <h1 class="section-title">Notification System</h1>
+    </div>
+
+    <h2>Notification Types</h2>
+    <p>The platform sends targeted notifications to keep users informed about important events and updates.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Trigger Events</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>System</strong></td>
+                <td>Platform updates, maintenance notices</td>
+            </tr>
+            <tr>
+                <td><strong>Enrollment</strong></td>
+                <td>Course enrollment confirmations</td>
+            </tr>
+            <tr>
+                <td><strong>Payment</strong></td>
+                <td>Payment success, failure, refund</td>
+            </tr>
+            <tr>
+                <td><strong>Course</strong></td>
+                <td>New lectures, assignments, updates</td>
+            </tr>
+            <tr>
+                <td><strong>Announcement</strong></td>
+                <td>Admin/teacher broadcasts</td>
+            </tr>
+            <tr>
+                <td><strong>Referral</strong></td>
+                <td>Someone used your code, commission earned</td>
+            </tr>
+            <tr>
+                <td><strong>Certificate</strong></td>
+                <td>Certificate ready for download</td>
+            </tr>
+            <tr>
+                <td><strong>Forum</strong></td>
+                <td>Replies, mentions, new discussions</td>
+            </tr>
+            <tr>
+                <td><strong>Reminder</strong></td>
+                <td>Upcoming sessions, deadlines</td>
+            </tr>
+            <tr>
+                <td><strong>Promotion</strong></td>
+                <td>Special offers, discounts</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Delivery Channels</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">📧</span> Email</h4>
+            <p>Detailed notifications sent to registered email</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🔔</span> In-App</h4>
+            <p>Real-time notifications in the platform</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📱</span> Push</h4>
+            <p>Browser push notifications (optional)</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💬</span> SMS</h4>
+            <p>Text messages for urgent notifications (optional)</p>
+        </div>
+    </div>
+
+    <h2>User Preferences</h2>
+    <p>Users can customize their notification preferences in Settings:</p>
+    <ul>
+        <li>Enable/disable email notifications</li>
+        <li>Enable/disable push notifications</li>
+        <li>Enable/disable SMS notifications</li>
+        <li>Mark all as read with one click</li>
+        <li>Delete individual or all notifications</li>
+    </ul>
+
+    <h2>Admin Broadcasting</h2>
+    <div class="card">
+        <p>Administrators can send notifications to:</p>
+        <ul>
+            <li>All users on the platform</li>
+            <li>Users with specific roles (students, teachers, agents)</li>
+            <li>Specific individual users</li>
+            <li>Students enrolled in specific courses</li>
+        </ul>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 17</span>
+    </div>
+</div>
+
+<!-- Section 16: Admin Dashboard -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 16</div>
+        <h1 class="section-title">Admin Dashboard</h1>
+    </div>
+
+    <h2>Dashboard Overview</h2>
+    <p>The Admin Dashboard provides comprehensive platform management capabilities with real-time analytics and reporting.</p>
+
+    <h2>Management Modules</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">👥</span> User Management</h4>
+            <p>Search, filter, approve, suspend, and manage all users</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📚</span> Program Management</h4>
+            <p>Create, edit, publish, and categorize courses</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📝</span> Enrollment Management</h4>
+            <p>Monitor enrollments, progress, and completions</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💳</span> Payment Management</h4>
+            <p>Track transactions, process refunds, view reports</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🤝</span> Agent Management</h4>
+            <p>Approve agents, manage codes, process payouts</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🛍️</span> Shop Management</h4>
+            <p>Manage products, inventory, and orders</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">👨‍🏫</span> Faculty Management</h4>
+            <p>Manage instructor profiles and assignments</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📢</span> Announcements</h4>
+            <p>Create and broadcast platform-wide announcements</p>
+        </div>
+    </div>
+
+    <h2>Analytics & Reporting</h2>
+    <div class="card">
+        <p>Real-time KPIs and metrics available on the dashboard:</p>
+        <ul>
+            <li><strong>Revenue Metrics:</strong> Monthly revenue, growth trends, payment methods</li>
+            <li><strong>User Metrics:</strong> Total users, new registrations, active users</li>
+            <li><strong>Course Metrics:</strong> Enrollments, completion rates, popular courses</li>
+            <li><strong>Agent Metrics:</strong> Commission payouts, top performers, conversion rates</li>
+            <li><strong>Shop Metrics:</strong> Sales volume, popular products, order status</li>
+        </ul>
+    </div>
+
+    <h2>Approval Workflows</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Application Type</th>
+                <th>Review Process</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Agent Applications</td>
+                <td>Review credentials → Approve/Reject → Generate codes</td>
+            </tr>
+            <tr>
+                <td>Teacher Applications</td>
+                <td>Review qualifications → Approve/Reject → Assign role</td>
+            </tr>
+            <tr>
+                <td>Payout Requests</td>
+                <td>Verify balance → Process via Stripe/Bank → Confirm</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 18</span>
+    </div>
+</div>
+
+<!-- Section 17: Security -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 17</div>
+        <h1 class="section-title">Security & Compliance</h1>
+    </div>
+
+    <h2>Authentication & Authorization</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Password Security:</strong> bcrypt hashing with salt (industry standard)</li>
+            <li><strong>JWT Tokens:</strong> Secure JSON Web Tokens for session management</li>
+            <li><strong>Email Verification:</strong> OTP-based account verification</li>
+            <li><strong>Role-Based Access:</strong> Granular permissions per user role</li>
+            <li><strong>Single Session:</strong> Agents limited to one active session (fraud prevention)</li>
+        </ul>
+    </div>
+
+    <h2>Data Protection</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>HTTPS Encryption</h4>
+            <p>All data transmitted over secure TLS connection</p>
+        </div>
+        <div class="feature-item">
+            <h4>Payment Security</h4>
+            <p>PCI-compliant via Stripe (no card data stored)</p>
+        </div>
+        <div class="feature-item">
+            <h4>Audit Logging</h4>
+            <p>IP addresses and timestamps recorded for all actions</p>
+        </div>
+        <div class="feature-item">
+            <h4>Rate Limiting</h4>
+            <p>Protection against brute force and spam attacks</p>
+        </div>
+    </div>
+
+    <h2>Privacy Features</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>User Data Control</td>
+                <td>Users can update/delete their personal information</td>
+            </tr>
+            <tr>
+                <td>Notification Opt-out</td>
+                <td>Granular control over communication preferences</td>
+            </tr>
+            <tr>
+                <td>Anonymous Posting</td>
+                <td>Optional anonymous participation in forums</td>
+            </tr>
+            <tr>
+                <td>Secure Passwords</td>
+                <td>Never stored in plain text, only hashed values</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Infrastructure</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Database:</strong> MongoDB Atlas (cloud-hosted, encrypted at rest)</li>
+            <li><strong>Backend:</strong> Node.js with Express.js framework</li>
+            <li><strong>Frontend:</strong> React with TypeScript (type-safe)</li>
+            <li><strong>File Storage:</strong> Secure uploads with access controls</li>
+            <li><strong>Process Management:</strong> PM2 for production reliability</li>
+        </ul>
+    </div>
+
+    <div class="highlight-box">
+        <h4>Compliance Ready</h4>
+        <p>The platform is built with GDPR considerations in mind, including user consent management, data portability, and the right to erasure. Terms & Conditions and Privacy Policy pages are included.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 19</span>
+    </div>
+</div>
+
+<!-- Section 18: Chat System -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 18</div>
+        <h1 class="section-title">Real-Time Chat System</h1>
+    </div>
+
+    <h2>Overview</h2>
+    <p>The integrated chat system enables direct communication between students, teachers, and support staff within the platform.</p>
+
+    <h2>Chat Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">💬</span> Direct Messaging</h4>
+            <p>One-to-one private conversations between users</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">👥</span> Group Chats</h4>
+            <p>Course-specific group discussions for enrolled students</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">📎</span> File Sharing</h4>
+            <p>Share documents and images (up to 5MB per file)</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">✓</span> Read Receipts</h4>
+            <p>Know when your messages have been read</p>
+        </div>
+    </div>
+
+    <h2>Chat Capabilities</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Message History</td>
+                <td>Full conversation history preserved</td>
+            </tr>
+            <tr>
+                <td>Edit Window</td>
+                <td>5 minutes to edit sent messages</td>
+            </tr>
+            <tr>
+                <td>Delete Window</td>
+                <td>10 minutes to delete messages</td>
+            </tr>
+            <tr>
+                <td>Max Message Length</td>
+                <td>2,000 characters per message</td>
+            </tr>
+            <tr>
+                <td>Typing Indicators</td>
+                <td>See when others are typing</td>
+            </tr>
+            <tr>
+                <td>Real-Time Updates</td>
+                <td>Instant message delivery via polling</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Use Cases</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Student to Teacher:</strong> Ask questions about course content privately</li>
+            <li><strong>Student to Student:</strong> Collaborate with classmates on projects</li>
+            <li><strong>Teacher Announcements:</strong> Quick updates to enrolled students</li>
+            <li><strong>Support Queries:</strong> Direct communication with platform support</li>
+        </ul>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 20</span>
+    </div>
+</div>
+
+<!-- Section 19: Faculty & Instructors -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 19</div>
+        <h1 class="section-title">Faculty & Instructor Management</h1>
+    </div>
+
+    <h2>Faculty Directory</h2>
+    <p>The platform maintains a comprehensive faculty directory showcasing all instructors, guest lecturers, and subject matter experts.</p>
+
+    <h2>Faculty Profile Components</h2>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon success"><span class="icon">👨‍🏫</span></div>
+            <div>
+                <div class="card-title">Instructor Profile</div>
+                <div class="card-subtitle">Public-facing profile visible to students</div>
+            </div>
+        </div>
+        <ul>
+            <li><strong>Personal Information:</strong> Name, title, professional photo</li>
+            <li><strong>Biography:</strong> Background, experience, teaching philosophy</li>
+            <li><strong>Qualifications:</strong> Degrees, certifications, credentials</li>
+            <li><strong>Expertise Areas:</strong> Subject specializations and skills</li>
+            <li><strong>Social Links:</strong> LinkedIn, Twitter, personal website</li>
+            <li><strong>Contact:</strong> Professional email for student queries</li>
+            <li><strong>Assigned Courses:</strong> List of courses they teach</li>
+        </ul>
+    </div>
+
+    <h2>Faculty Types</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Full-Time Faculty</h4>
+            <p>Permanent instructors with full course creation and management access</p>
+        </div>
+        <div class="feature-item">
+            <h4>Adjunct Faculty</h4>
+            <p>Part-time instructors assigned to specific courses</p>
+        </div>
+        <div class="feature-item">
+            <h4>Guest Lecturers</h4>
+            <p>Industry experts invited for specific sessions or modules</p>
+        </div>
+        <div class="feature-item">
+            <h4>Teaching Assistants</h4>
+            <p>Support staff helping with course management</p>
+        </div>
+    </div>
+
+    <h2>Admin Faculty Management</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Add Faculty</td>
+                <td>Create new faculty profile with all details</td>
+            </tr>
+            <tr>
+                <td>Edit Profile</td>
+                <td>Update information, photo, credentials</td>
+            </tr>
+            <tr>
+                <td>Assign Courses</td>
+                <td>Link faculty to specific programs</td>
+            </tr>
+            <tr>
+                <td>Set Status</td>
+                <td>Active, on leave, or inactive</td>
+            </tr>
+            <tr>
+                <td>Feature on Homepage</td>
+                <td>Highlight key faculty members</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 21</span>
+    </div>
+</div>
+
+<!-- Section 20: Platform Settings -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 20</div>
+        <h1 class="section-title">Platform Settings & Configuration</h1>
+    </div>
+
+    <h2>User Settings</h2>
+    <p>Each user has access to personal settings to customize their experience.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Profile Settings</h4>
+            <p>Update name, avatar, bio, and contact information</p>
+        </div>
+        <div class="feature-item">
+            <h4>Security Settings</h4>
+            <p>Change password, view login history</p>
+        </div>
+        <div class="feature-item">
+            <h4>Notification Preferences</h4>
+            <p>Toggle email, push, and SMS notifications</p>
+        </div>
+        <div class="feature-item">
+            <h4>Privacy Settings</h4>
+            <p>Control profile visibility and data sharing</p>
+        </div>
+    </div>
+
+    <h2>Admin Configuration</h2>
+    <p>Administrators can configure platform-wide settings through the Admin Dashboard.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Setting Category</th>
+                <th>Configurable Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Course Settings</strong></td>
+                <td>Completion threshold (85%), exam pass score (100%), exam duration (30 min)</td>
+            </tr>
+            <tr>
+                <td><strong>Payment Settings</strong></td>
+                <td>Currency (EUR), tax rates, shipping costs, free shipping threshold</td>
+            </tr>
+            <tr>
+                <td><strong>Referral Settings</strong></td>
+                <td>Commission tiers, credit validity (60 days), credit usage percentages</td>
+            </tr>
+            <tr>
+                <td><strong>Forum Settings</strong></td>
+                <td>Post approval required, edit window, spam prevention rules</td>
+            </tr>
+            <tr>
+                <td><strong>Chat Settings</strong></td>
+                <td>Max message length, attachment size, edit/delete windows</td>
+            </tr>
+            <tr>
+                <td><strong>Certificate Settings</strong></td>
+                <td>Validity period, auto-generation rules, signature settings</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Agent-Specific Settings</h2>
+    <div class="card">
+        <p>Agents have additional settings in their dashboard:</p>
+        <ul>
+            <li><strong>Bank Details:</strong> Update account name, IBAN, SWIFT code</li>
+            <li><strong>Payout Preferences:</strong> Stripe Connect or bank transfer</li>
+            <li><strong>Notification Settings:</strong> Referral alerts, commission updates</li>
+            <li><strong>Profile Information:</strong> Company details and tax information</li>
+        </ul>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 22</span>
+    </div>
+</div>
+
+<!-- Section 21: Email Communications -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 21</div>
+        <h1 class="section-title">Email Communications</h1>
+    </div>
+
+    <h2>Automated Email Triggers</h2>
+    <p>The platform sends automated emails at key moments in the user journey to keep users informed and engaged.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Email Type</th>
+                <th>Trigger</th>
+                <th>Recipient</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Welcome Email</td>
+                <td>User registration</td>
+                <td>New user</td>
+            </tr>
+            <tr>
+                <td>Email Verification</td>
+                <td>Account creation</td>
+                <td>New user</td>
+            </tr>
+            <tr>
+                <td>Password Reset</td>
+                <td>Forgot password request</td>
+                <td>Requesting user</td>
+            </tr>
+            <tr>
+                <td>Enrollment Confirmation</td>
+                <td>Successful course enrollment</td>
+                <td>Student</td>
+            </tr>
+            <tr>
+                <td>Payment Receipt</td>
+                <td>Successful payment</td>
+                <td>Buyer</td>
+            </tr>
+            <tr>
+                <td>Order Confirmation</td>
+                <td>Shop purchase completed</td>
+                <td>Customer</td>
+            </tr>
+            <tr>
+                <td>Session Reminder</td>
+                <td>24 hours before live session</td>
+                <td>Enrolled students</td>
+            </tr>
+            <tr>
+                <td>Certificate Ready</td>
+                <td>Certificate generated</td>
+                <td>Student</td>
+            </tr>
+            <tr>
+                <td>Referral Notification</td>
+                <td>Someone used referral code</td>
+                <td>Referrer</td>
+            </tr>
+            <tr>
+                <td>Commission Earned</td>
+                <td>Referral purchase completed</td>
+                <td>Agent</td>
+            </tr>
+            <tr>
+                <td>Agent Approval</td>
+                <td>Application approved</td>
+                <td>New agent</td>
+            </tr>
+            <tr>
+                <td>Credit Expiry Warning</td>
+                <td>Credits expiring soon</td>
+                <td>Student</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Email Features</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Branded Templates</h4>
+            <p>Professional emails with Online IBS branding</p>
+        </div>
+        <div class="feature-item">
+            <h4>Personalization</h4>
+            <p>Dynamic content with user names and details</p>
+        </div>
+        <div class="feature-item">
+            <h4>Action Links</h4>
+            <p>Direct links to relevant platform pages</p>
+        </div>
+        <div class="feature-item">
+            <h4>Unsubscribe Option</h4>
+            <p>Users can opt out of promotional emails</p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 23</span>
+    </div>
+</div>
+
+<!-- Section 22: Support & Contact -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 22</div>
+        <h1 class="section-title">Support & Contact</h1>
+    </div>
+
+    <h2>Contact Options</h2>
+    <p>Users can reach the Online IBS support team through multiple channels.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">📧</span> Email Support</h4>
+            <p>Submit inquiries via the contact form or direct email</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🤖</span> AI Chatbot</h4>
+            <p>Instant answers to common questions 24/7</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💬</span> Live Chat</h4>
+            <p>Real-time support during business hours</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">❓</span> Help Center</h4>
+            <p>Self-service FAQ and knowledge base</p>
+        </div>
+    </div>
+
+    <h2>Contact Form</h2>
+    <div class="card">
+        <p>The public contact form collects:</p>
+        <ul>
+            <li><strong>Name:</strong> Full name of the inquirer</li>
+            <li><strong>Email:</strong> Contact email for response</li>
+            <li><strong>Subject:</strong> Topic or category of inquiry</li>
+            <li><strong>Message:</strong> Detailed description of the inquiry</li>
+        </ul>
+        <p style="margin-top: 15px; font-size: 14px; color: var(--gray);">All inquiries are logged and routed to the appropriate team for response.</p>
+    </div>
+
+    <h2>AI Chatbot Capabilities</h2>
+    <p>The integrated AI chatbot provides instant responses to common questions:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Sample Questions Answered</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Programs & Courses</td>
+                <td>Available programs, duration, curriculum details</td>
+            </tr>
+            <tr>
+                <td>Pricing & Fees</td>
+                <td>Course costs, payment options, discounts</td>
+            </tr>
+            <tr>
+                <td>Enrollment</td>
+                <td>How to enroll, requirements, deadlines</td>
+            </tr>
+            <tr>
+                <td>Referral Program</td>
+                <td>How it works, earnings, credit usage</td>
+            </tr>
+            <tr>
+                <td>Certificates</td>
+                <td>Requirements, verification, downloads</td>
+            </tr>
+            <tr>
+                <td>Technical Support</td>
+                <td>Login issues, video playback, payments</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 24</span>
+    </div>
+</div>
+
+<!-- Section 23: Legal & Compliance -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 23</div>
+        <h1 class="section-title">Legal & Compliance</h1>
+    </div>
+
+    <h2>Legal Pages</h2>
+    <p>The platform includes comprehensive legal documentation accessible to all users.</p>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4><span class="icon">📜</span> Terms & Conditions</h4>
+            <p>User agreement governing platform usage</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">🔒</span> Privacy Policy</h4>
+            <p>Data collection, usage, and protection policies</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">💳</span> Refund Policy</h4>
+            <p>Terms for course and product refunds</p>
+        </div>
+        <div class="feature-item">
+            <h4><span class="icon">©️</span> Copyright Notice</h4>
+            <p>Intellectual property and content ownership</p>
+        </div>
+    </div>
+
+    <h2>Data Protection Measures</h2>
+    <div class="card">
+        <ul>
+            <li><strong>User Consent:</strong> Explicit consent collected during registration</li>
+            <li><strong>Data Minimization:</strong> Only necessary data collected</li>
+            <li><strong>Access Rights:</strong> Users can view and download their data</li>
+            <li><strong>Deletion Rights:</strong> Users can request account deletion</li>
+            <li><strong>Data Portability:</strong> Export personal data in standard formats</li>
+            <li><strong>Breach Notification:</strong> Process for notifying users of any breaches</li>
+        </ul>
+    </div>
+
+    <h2>Compliance Standards</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Standard</th>
+                <th>Implementation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GDPR (EU)</td>
+                <td>Consent management, data rights, privacy by design</td>
+            </tr>
+            <tr>
+                <td>PCI DSS</td>
+                <td>Via Stripe - no card data stored on platform</td>
+            </tr>
+            <tr>
+                <td>SSL/TLS</td>
+                <td>All connections encrypted with HTTPS</td>
+            </tr>
+            <tr>
+                <td>Cookie Consent</td>
+                <td>Cookie notice and preference management</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <h4>Audit Trail</h4>
+        <p>All significant user actions are logged with timestamps, IP addresses, and user agents for security auditing and compliance purposes.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 25</span>
+    </div>
+</div>
+
+<!-- Section 24: Testimonials & Social Proof -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 24</div>
+        <h1 class="section-title">Testimonials & Social Proof</h1>
+    </div>
+
+    <h2>Testimonial Management</h2>
+    <p>The platform features student testimonials and success stories to build trust and encourage enrollment.</p>
+
+    <h2>Testimonial Components</h2>
+    <div class="card">
+        <p>Each testimonial includes:</p>
+        <ul>
+            <li><strong>Student Name:</strong> Name of the testimonial author</li>
+            <li><strong>Photo:</strong> Profile picture or avatar</li>
+            <li><strong>Role/Title:</strong> Student's profession or designation</li>
+            <li><strong>Company:</strong> Organization they work for (optional)</li>
+            <li><strong>Content:</strong> Their experience and feedback</li>
+            <li><strong>Rating:</strong> Star rating (1-5 stars)</li>
+            <li><strong>Program:</strong> Course they completed</li>
+            <li><strong>Date:</strong> When they provided the testimonial</li>
+        </ul>
+    </div>
+
+    <h2>Display Locations</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h4>Homepage</h4>
+            <p>Featured testimonials in carousel format</p>
+        </div>
+        <div class="feature-item">
+            <h4>Program Pages</h4>
+            <p>Course-specific reviews from past students</p>
+        </div>
+        <div class="feature-item">
+            <h4>About Page</h4>
+            <p>Success stories and student achievements</p>
+        </div>
+        <div class="feature-item">
+            <h4>Landing Pages</h4>
+            <p>Targeted testimonials for marketing campaigns</p>
+        </div>
+    </div>
+
+    <h2>Admin Management</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Add Testimonial</td>
+                <td>Create new testimonials manually</td>
+            </tr>
+            <tr>
+                <td>Approve/Reject</td>
+                <td>Review submitted testimonials</td>
+            </tr>
+            <tr>
+                <td>Feature</td>
+                <td>Mark testimonials for homepage display</td>
+            </tr>
+            <tr>
+                <td>Order</td>
+                <td>Arrange display order on pages</td>
+            </tr>
+            <tr>
+                <td>Archive</td>
+                <td>Remove outdated testimonials</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 26</span>
+    </div>
+</div>
+
+<!-- Section 25: Platform Summary -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">Section 25</div>
+        <h1 class="section-title">Platform Summary</h1>
+    </div>
+
+    <h2>Key Platform Statistics</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">5</div>
+            <div class="stat-label">User Roles</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">27+</div>
+            <div class="stat-label">Data Models</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100+</div>
+            <div class="stat-label">API Endpoints</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">11</div>
+            <div class="stat-label">Target Regions</div>
+        </div>
+    </div>
+
+    <h2>Complete Feature List</h2>
+    <div class="card">
+        <div style="column-count: 2; column-gap: 30px;">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li>User Registration & Verification</li>
+                <li>Multi-Role Access Control</li>
+                <li>Course Enrollment & Progress</li>
+                <li>Video Lecture Delivery</li>
+                <li>Assessment & Examinations</li>
+                <li>Certificate Generation</li>
+                <li>Live Session Scheduling</li>
+                <li>Discussion Forums</li>
+                <li>Real-Time Chat</li>
+                <li>E-Commerce Shop</li>
+                <li>Shopping Cart</li>
+                <li>Stripe Payment Processing</li>
+                <li>Multiple Payment Methods</li>
+                <li>Agent Partner Program</li>
+                <li>Tiered Commissions</li>
+                <li>Regional Pricing</li>
+                <li>Student Referral Credits</li>
+                <li>Milestone Bonuses</li>
+                <li>Payout Management</li>
+                <li>Notification System</li>
+                <li>Email Automation</li>
+                <li>Admin Dashboard</li>
+                <li>Analytics & Reporting</li>
+                <li>Faculty Directory</li>
+                <li>AI Chatbot</li>
+                <li>Contact Form</li>
+                <li>Testimonial Management</li>
+                <li>Legal Pages</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Technology Highlights</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Technology</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Frontend</td>
+                <td>React 19 with TypeScript</td>
+            </tr>
+            <tr>
+                <td>Backend</td>
+                <td>Node.js with Express.js</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>MongoDB Atlas (Cloud)</td>
+            </tr>
+            <tr>
+                <td>Payments</td>
+                <td>Stripe (Cards, SEPA, Local Methods)</td>
+            </tr>
+            <tr>
+                <td>Authentication</td>
+                <td>JWT with bcrypt encryption</td>
+            </tr>
+            <tr>
+                <td>Deployment</td>
+                <td>PM2 Process Manager</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <h4>Production Ready</h4>
+        <p>The Online IBS platform is fully production-ready with comprehensive security measures, scalable architecture, and robust error handling. The platform supports thousands of concurrent users and is designed for global deployment.</p>
+    </div>
+
+    <div class="page-footer">
+        <span>Online IBS - Confidential</span>
+        <span>Page 27</span>
+    </div>
+</div>
+
+<!-- Final Page -->
+<div class="page" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 80vh;">
+    <div style="max-width: 500px;">
+        <div style="margin-bottom: 30px;"><img src="ibs_logo.png" alt="Online IBS Logo" style="height: 100px; max-width: 220px; object-fit: contain;"></div>
+        <h1 style="font-size: 32px; color: var(--primary); margin-bottom: 20px;">Thank You</h1>
+        <p style="font-size: 16px; color: var(--gray); margin-bottom: 40px;">
+            For more information about the Online IBS platform, please contact our team.
+        </p>
+
+        <div style="background: var(--light-gray); border-radius: 12px; padding: 30px; text-align: left;">
+            <h3 style="margin: 0 0 20px; color: var(--dark);">Contact Information</h3>
+            <p style="margin: 10px 0; font-size: 14px;"><strong>Website:</strong> https://onlineibs.com</p>
+            <p style="margin: 10px 0; font-size: 14px;"><strong>Email:</strong> support@onlineibs.com</p>
+            <p style="margin: 10px 0; font-size: 14px;"><strong>Documentation Version:</strong> 2.0</p>
+            <p style="margin: 10px 0; font-size: 14px;"><strong>Last Updated:</strong> January 2026</p>
+        </div>
+    </div>
+
+    <div class="page-footer" style="position: absolute; bottom: 60px; left: 50px; right: 50px;">
+        <span>Online IBS - Confidential</span>
+        <span>Page 20</span>
+    </div>
+</div>
+
+</body>
+</html>
